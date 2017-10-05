@@ -22,6 +22,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        REST.downloadImage(url: "http://s2.glbimg.com/Vlhl06ZoM03hxEbi39F0r5lg3fU=/s.glbimg.com/et/gs/f/original/2016/11/25/trufa_da_ana.jpg") { (image:UIImage?) in
+            DispatchQueue.main.async {
+                self.ivCars.image = image
+            }
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
