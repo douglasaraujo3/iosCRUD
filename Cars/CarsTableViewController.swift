@@ -43,7 +43,7 @@ class CarsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cars.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let car = cars[indexPath.row]
@@ -59,6 +59,7 @@ class CarsTableViewController: UITableViewController {
             REST.deleteCar(car, onComplete: { (success:Bool) in
                 if success{
                     DispatchQueue.main.async {
+                        self.cars.remove(at: indexPath.row)
                         tableView.deleteRows(at: [indexPath], with: .fade)
                     }
                 }
