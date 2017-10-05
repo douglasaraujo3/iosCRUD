@@ -132,24 +132,63 @@ class REST {
     
     static func updateCar(_ car: Car, onComplete: @escaping (Bool) -> Void){
         let path = basePath + "/"+car.id!
-        guard let url = URL(string: basePath) else {
+        guard let url = URL(string: path) else {
             onComplete(false)
             return
         }
         
-        var request = URLRequest(url: path)
-        request.httpMethod = "POST"
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
         
         
         let carDict: [String: Any] = [
             "brand": car.brand,
             "name": car.name,
             "price": car.price,
-            "gasType":car.gasType.rawValue
+            "gasType":car.gasType.rawValue,
+            "id":car.id!
         ]
         do {
             let json = try JSONSerialization.data(withJSONObject: carDict, options: JSONSerialization.WritingOptions())
             request.httpBody = json
+            session.dataTask(with: request, completionHandler: { (data:Data?, response:URLResponse?, error:Error?) in
+                if error != nil{
+                    
+                    guard let  response = response as? HTTPURLResponse else{
+                        onComplete(false)
+                        return
+                    }
+                    if response.statusCode == 200{
+                        guard let _ = data else{
+                            onComplete(false)
+                            return
+                        }
+                        onComplete(true)
+                    }
+                    
+                }else{
+                    onComplete(true)
+                }
+            }).resume()
+        }catch{
+            onComplete(false)
+            print(error.localizedDescription)
+        }
+        
+        
+    }
+    static func deleteCar(_ car: Car, onComplete: @escaping (Bool) -> Void){
+        let path = basePath + "/"+car.id!
+        guard let url = URL(string: path) else {
+            onComplete(false)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        
+        do {
             session.dataTask(with: request, completionHandler: { (data:Data?, response:URLResponse?, error:Error?) in
                 if error != nil{
                     

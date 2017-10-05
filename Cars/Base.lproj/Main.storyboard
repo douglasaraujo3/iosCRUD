@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="scw-vs-fy8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="scw-vs-fy8">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -149,6 +149,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnCadastraAtualiza" destination="7N9-k9-njp" id="PBL-tv-tDQ"/>
                         <outlet property="ivCars" destination="IMy-b6-tFy" id="ozM-Ke-l6M"/>
                         <outlet property="scGasType" destination="FbW-wz-No2" id="Rqt-1t-xsd"/>
                         <outlet property="tfBrand" destination="VGv-r2-cPV" id="Zpo-7L-rGb"/>
@@ -180,6 +181,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SaW-lC-n8X"/>
+        <segue reference="PyF-Jm-wiH"/>
     </inferredMetricsTieBreakers>
 </document>

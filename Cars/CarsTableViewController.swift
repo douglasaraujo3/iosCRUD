@@ -32,7 +32,12 @@ class CarsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         loadCars()
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "edit"{
+            let vc = segue.destination as! ViewController
+            vc.car = cars[tableView.indexPathForSelectedRow!.row]
+        }
+    }
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,7 +53,19 @@ class CarsTableViewController: UITableViewController {
         
         return cell
     }
-
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            let car = cars[indexPath.row]
+            REST.deleteCar(car, onComplete: { (success:Bool) in
+                if success{
+                    DispatchQueue.main.async {
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    }
+                }
+                
+            })
+        }
+    }
 }
 
 
